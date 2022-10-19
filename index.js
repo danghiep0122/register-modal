@@ -1,4 +1,4 @@
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
 import CommonLayout from '../../layouts/commonLayout/CommonLayout'
 import images from '../../assets/img/image'
 import { XtimesIcon } from '../../icons/Icons'
@@ -6,19 +6,39 @@ import './styles.scss'
 
 function Menu() {
   const [login, setLogin] = useState('login')
+  const [emailInput, setEmailInput] = useState('')
   const [showModal, setShowModal] = useState(true)
+  const [isEmail, setIsEmail] = useState('')
+
+  useEffect(() => {
+    const emailRegex = /^[\w-\\.]+@([\w-]+\.)+[\w-]{2,4}$/
+
+    if (emailInput.trim() === '') {
+      setIsEmail('Please enter your Email')
+    } else if (!emailInput.trim().match(emailRegex)) {
+      setIsEmail('This email is not valid')
+    } else {
+      setIsEmail('')
+      console.log(isEmail)
+    }
+  }, [emailInput, isEmail])
+
   const handleLogin = () => {
     setLogin('login')
   }
+
   const handleSignin = () => {
     setLogin('registered')
   }
+
   const handleOffModal = () => {
     setShowModal(false)
   }
+
   const handleShowModal = () => {
     setShowModal(true)
   }
+
   return (
     <CommonLayout>
       <div className="body">
@@ -54,29 +74,33 @@ function Menu() {
                 </div>
                 <div className="content-input">
                   <form className="form-input-modal">
-                    <div className="form-group">
+                    <div className={`${login} form-group`}>
                       <label className={login}>Full Name</label>
                       <input
                         className={login}
                         placeholder="Enter your Full Name"
                       />
                     </div>
-                    <div className="form-group">
+                    <div className={`${login} form-group`}>
                       <label className={login}>Phone Number</label>
-                      <input
-                        className={login}
-                        placeholder="Enter your Phone Number"
-                      />
+                      <input placeholder="Enter your Phone Number" />
                     </div>
                     <div className="form-group">
                       <label>Email</label>
-                      <input placeholder="Enter your Email" />
+                      <input
+                        onChange={(e) => {
+                          setEmailInput(e.target.value)
+                        }}
+                        value={emailInput}
+                        placeholder="Enter your Email"
+                      />
+                      <p>{isEmail}</p>
                     </div>
                     <div className="form-group">
                       <label>Password</label>
                       <input placeholder="Enter your Password" />
                     </div>
-                    <div className="form-group">
+                    <div className={`${login} form-group`}>
                       <label className={login}>Confirm Password</label>
                       <input
                         className={login}
