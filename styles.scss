@@ -1,3 +1,4 @@
+
 div.body {
     margin-top: 150px;
     box-sizing: border-box;
@@ -39,11 +40,11 @@ div.body {
 }
 
 .log-modal-wrapper.login {
-    height: 350px;
+    min-height: 350px;
 }
 
 .log-modal-wrapper.registered {
-    height: 650px;
+    min-height: 650px;
 }
 
 .xBtn-off-modal {
@@ -84,7 +85,7 @@ div.body {
     display: flex;
     align-items: center;
     justify-content: flex-start;
-    margin: 20px 20px;
+    margin: 10px;
 
     & h2 {
         font-size: 1.2rem;
@@ -111,12 +112,22 @@ div.body {
     display: flex;
     flex-direction: column;
     align-items: stretch;
-    color: #fff;
 }
 
 div.form-group {
     display: flex;
     flex-direction: column;
+    padding: 8px 0;
+
+    & p {
+        margin: 0;
+        color: #e31837;
+        font-size: .9rem;
+    }
+}
+
+div.form-group.login {
+    display: none;
 }
 
 .form-input-modal label {
@@ -131,7 +142,7 @@ div.form-group {
     border-radius: .2rem;
     font-size: 1rem;
     padding: 12px;
-    margin: 8px;
+    margin: 0 8px;
     border: 1px rgba(153, 153, 153, 40%) solid;
     transition: all ease .3s;
 
